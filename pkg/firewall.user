@@ -1,0 +1,45 @@
+#
+#TARGET: /etc/firewall.user
+#
+#config in /etc/config/firewall
+#
+# This file is interpreted as shell script.
+# Put your custom iptables rules here, they will
+# be executed with each firewall (re-)start.
+
+# Internal uci firewall chains are flushed and recreated on reload, so
+# put custom rules into the root chains e.g. INPUT or FORWARD or into the
+# special user chains, e.g. input_wan_rule or postrouting_lan_rule.
+#
+#for temp overwrite system firewall config
+#
+#/usr/sbin/iptables -I FORWARD -j ACCEPT
+#/usr/sbin/iptables -I INPUT -j ACCEPT
+#/usr/sbin/iptables -I OUTPUT -j ACCEPT
+#/usr/sbin/iptables -I POSTROUTING -t nat -o eth0.2 -j MASQUERADE
+#/usr/sbin/iptables -I POSTROUTING -t nat -o pppoe-wan -j MASQUERADE
+#/sbin/sysctl -w net.ipv4.ip_forward=1
+#
+
+ipset -N gfwlist iphash -!
+
+#Telegram
+#ipset add gfwlist 91.108.4.0/22
+#ipset add gfwlist 91.108.8.0/22
+#ipset add gfwlist 91.108.12.0/22
+#ipset add gfwlist 91.108.16.0/22
+#ipset add gfwlist 91.108.56.0/22
+#ipset add gfwlist 149.154.160.0/20
+
+#Netflix
+#ipset add gfwlist 23.246.0.0/18
+#ipset add gfwlist 37.77.184.0/21
+#ipset add gfwlist 45.57.0.0/17
+#ipset add gfwlist 64.120.128.0/17
+#ipset add gfwlist 66.197.128.0/17
+#ipset add gfwlist 108.175.32.0/20
+#ipset add gfwlist 192.173.64.0/18
+#ipset add gfwlist 198.38.96.0/19
+#ipset add gfwlist 198.45.48.0/20
+
+iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1081

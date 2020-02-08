@@ -1,0 +1,9 @@
+{
+  "server":"xxx.xxx.xxx.xxx",
+  "server_port":xxxx,
+  "local_address":"127.0.0.1",
+  "local_port":1081,
+  "password":"xxxxxxxx",
+  "timeout":600,
+  "method":"aes-xxx-xxx"
+}
