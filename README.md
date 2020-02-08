@@ -9,6 +9,6 @@ xiaomi wifi add ss
 4. Modify pkg/ss.json content,add your ss service info.
 5. Transfer step3's files to miwifi's /tmp path with winscp tool.
 [WinSCP](https://winscp.net)
-6. Connect to miwifi with putty tool and run sh /tmp/install.sh.
+6. Connect to miwifi with putty tool and run `cd /tmp && sh install.sh`.
 [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/)
 7. Enjoy.
