@@ -1,9 +1,7 @@
 {
-  "server":"39592ec9-8625-485c-9c2a-df8cdf34abab.st2046.net",
-  "server_port":31820,
-  "local_address":"127.0.0.1",
-  "local_port":1081,
-  "password":"WocrYP",
-  "timeout":600,
-  "method":"aes-128-cfb"
+  "server" : "127.0.0.1"",
+  "server_port" : 443,
+  "local_port" : 1081,
+  "password" : "password",
+  "method" : "aes-128-cfb"
 }
