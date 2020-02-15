@@ -1,22 +1,21 @@
 #!/bin/sh
 
-mkdir -p /userdisk/sysapihttpd/ss/bin
-cp -f pkg/ss-redir /userdisk/sysapihttpd/ss/bin
-chmod +x /userdisk/sysapihttpd/ss/bin/ss-redir
+ROOT_PATH=/data
 
-mkdir -p /userdisk/sysapihttpd/ss/etc
-cp -f pkg/ss.json /etc/ss.json
+chmod +x pkg/usr/bin/*
+chmod +x pkg/etc/init.d/shadowsocks
+sed -i "s|service_start /usr|service_start $ROOT_PATH/usr|g" pkg/etc/init.d/shadowsocks
+sed -i "s|service_stop /usr|service_stop $ROOT_PATH/usr|g" pkg/etc/init.d/shadowsocks
 
-cp -f pkg/gfwlist.conf /userdisk/sysapihttpd/ss/etc/gfwlist.conf
+cp -f pkg/gfwlist.conf /tmp/gfwlist.conf
 rm -f /etc/dnsmasq.d/gfwlist.conf
-ln -sf /userdisk/sysapihttpd/ss/etc/gfwlist.conf /etc/dnsmasq.d/gfwlist.conf
+ln -sf /tmp/gfwlist.conf /etc/dnsmasq.d/gfwlist.conf
 
-cp -f pkg/firewall.user /etc/firewall.user
+cp -rf pkg/usr $ROOT_PATH
+cp -rf pkg/etc /
 
-cp pkg/ss /etc/init.d/ss
-chmod +x /etc/init.d/ss
-/etc/init.d/ss enable
-/etc/init.d/ss restart
+/etc/init.d/shadowsocks enable
+/etc/init.d/shadowsocks restart
 
 /etc/init.d/dnsmasq restart
 /etc/init.d/firewall restart
